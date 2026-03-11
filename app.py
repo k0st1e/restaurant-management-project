@@ -51,6 +51,30 @@ class MenuItem(db.Model):
  
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
+
+
+ 
+def seed_data():
+    if MenuItem.query.count() == 0:
+        menu_items = [
+            MenuItem(name="Margherita Pizza", description="Classic tomato, mozzarella, basil.", price=12.99, category="Pizza"),
+            MenuItem(name="Truffle Pasta", description="Creamy mushroom pasta with truffle oil.", price=16.50, category="Pasta"),
+            MenuItem(name="Grilled Salmon", description="Served with lemon herb rice.", price=19.90, category="Main"),
+            MenuItem(name="Caesar Salad", description="Crisp romaine, parmesan, croutons.", price=9.25, category="Salad"),
+            MenuItem(name="Tiramisu", description="Coffee-flavored Italian dessert.", price=7.50, category="Dessert"),
+            MenuItem(name="Fresh Lemonade", description="House-made sparkling lemonade.", price=4.75, category="Drinks"),
+        ]
+        db.session.add_all(menu_items)
+
+    if BlogPost.query.count() == 0:
+        posts = [
+            BlogPost(title="Welcome to Savory Haven", content="Discover our story, passion for food, and cozy atmosphere."),
+            BlogPost(title="Chef Special of the Week", content="Every week our chef creates a seasonal signature dish."),
+            BlogPost(title="How We Source Fresh Ingredients", content="We partner with local farms for top-quality produce and meats."),
+        ]
+        db.session.add_all(posts)
+
+    db.session.commit()
  
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
