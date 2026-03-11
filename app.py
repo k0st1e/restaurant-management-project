@@ -80,3 +80,17 @@ def seed_data():
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
+
+
+
+def current_user():
+    user_id = session.get("user_id")
+    if not user_id:
+        return None
+    return User.query.get(user_id)
+
+
+@app.context_processor
+def inject_user():
+    return {"current_user": current_user()}
+
