@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>Our Menu</h1>
+  <div class="card-grid">
+    {% for item in items %}
+    <article class="card">
+      <img src="{{ url_for('static', filename='images/menu.png') }}" alt="{{ item.name }}">
+      <span class="badge">{{ item.category }}</span>
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <strong>${{ '%.2f'|format(item.price) }}</strong>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
