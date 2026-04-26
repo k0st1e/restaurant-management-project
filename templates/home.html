@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Welcome to Savory Haven</h1>
+    <p>A modern restaurant website built with Flask, featuring reviews, a menu, blog, and contact map.</p>
+    <a class="btn" href="{{ url_for('menu') }}">Explore Menu</a>
+  </div>
+  <img src="{{ url_for('static', filename='images/hero.png') }}" alt="Restaurant interior">
+</section>
+
+<section>
+  <h2>Featured Dishes</h2>
+  <div class="card-grid">
+    {% for item in featured %}
+    <article class="card">
+      <img src="{{ url_for('static', filename='images/dish' ~ loop.index ~ '.png') }}" alt="{{ item.name }}">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <strong>${{ '%.2f'|format(item.price) }}</strong>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>Latest Blog Posts</h2>
+  <div class="card-grid">
+    {% for post in posts %}
+    <article class="card">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.content }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>Guest Reviews</h2>
+  <div class="card-grid">
+    {% for review in reviews %}
+    <article class="card">
+      <h3>{{ review.username }}</h3>
+      <p>{{ review.content }}</p>
+      <p>{{ '★' * review.rating }}{{ '☆' * (5 - review.rating) }}</p>
+    </article>
+    {% else %}
+    <article class="card"><p>No reviews yet. Be the first to leave one.</p></article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

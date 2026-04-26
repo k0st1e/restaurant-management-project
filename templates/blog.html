@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+  <h1>Restaurant Blog</h1>
+  {% for post in posts %}
+  <article class="blog-post">
+    <img src="{{ url_for('static', filename='images/blog.png') }}" alt="Blog image">
+    <div>
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+      <small>{{ post.created_at }}</small>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}
